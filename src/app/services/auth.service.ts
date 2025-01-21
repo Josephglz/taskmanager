@@ -20,6 +20,10 @@ export class AuthService {
     return this._http.post<APIResponse>(`${environment.API_URL}/api/auth/register`, user);
   }
 
+  logout() {
+    localStorage.removeItem('token');
+  }
+
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
