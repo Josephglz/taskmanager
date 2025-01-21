@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { User } from '../../../models/User';
-import { AuthService, LoginResponse } from '../../../services/auth.service';
+import { AuthService, APIResponse } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +26,7 @@ export class LoginComponent {
     private _authService: AuthService,
   ){
     this._loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, this.emailValidator()]],
+      email: ['', [Validators.required, this._authService.emailValidator()]],
       password: ['', [Validators.required, Validators.minLength(8)]]
     })
   }
@@ -69,7 +69,7 @@ export class LoginComponent {
     this.errorMessage = null;
 
     this._authService.login(email, password).subscribe({
-      next: (response: LoginResponse) => {
+      next: (response: APIResponse) => {
         const { token } = response;
         if(!token || token.length === 0) return;
         this._authService.saveToken(token);
@@ -84,14 +84,4 @@ export class LoginComponent {
       }
     })
   }
-
-  emailValidator() {
-    const emailRegex =
-      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    return (control: any) => {
-      if (!control.value) return null;
-      return emailRegex.test(control.value) ? null : { email: true };
-    };
-  }
-
 }
