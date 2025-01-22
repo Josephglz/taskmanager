@@ -72,7 +72,6 @@ export class CardModalComponent {
         this.hideModal(1);
       },
       error: (error) => {
-        console.error(error);
         this.errorMessage = 'Ocurrió un error al intentar guardar la tarea, por favor intente nuevamente.';
       }
     })
