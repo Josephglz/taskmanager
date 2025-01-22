@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment.development';
 import { User } from '../models/User';
 
 @Injectable({
@@ -12,11 +13,11 @@ export class AuthService {
 
   login(email: string, password: string) {
     const body = { email, password };
-    return this._http.post<APIResponse>(`/api/auth/login`, body)
+    return this._http.post<APIResponse>(`${environment.API_URL}/api/auth/login`, body)
   }
 
   register(user: User) {
-    return this._http.post<APIResponse>(`/api/auth/register`, user);
+    return this._http.post<APIResponse>(`${environment.API_URL}/api/auth/register`, user);
   }
 
   logout() {
