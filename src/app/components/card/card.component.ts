@@ -21,11 +21,11 @@ export class CardComponent {
   deleteTask(): void {
     this._taskService.deleteTask(this.task.id).subscribe({
       next: () => {
-        this._toastr.success('Task deleted successfully');
+        this._toastr.warning('Tarea eliminada correctamente.');
         this.onTaskDeleted.emit();
       },
       error: (error) => {
-        this._toastr.error('An error occurred while deleting the task');
+        this._toastr.error('Ocurrió un error al eliminar la tarea.');
       }
     });
   }
