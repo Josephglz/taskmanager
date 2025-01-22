@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'http://64.23.155.12',
+  API_URL: 'https://task-manager-api-exam-b5ecafd638a2.herokuapp.com',
 };
