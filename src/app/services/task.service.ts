@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment.development';
 import { Task } from '../models/Task';
 import { Observable } from 'rxjs';
 
@@ -13,14 +12,14 @@ export class TaskService {
   ) { }
 
   getTasks(): Observable<Task[]> {
-    return this._http.get<Task[]>(`${environment.API_URL}/api/tasks`);
+    return this._http.get<Task[]>(`/api/tasks`);
   }
 
   deleteTask(id: number): Observable<Task> {
-    return this._http.delete<Task>(`${environment.API_URL}/api/tasks/${id}`);
+    return this._http.delete<Task>(`/api/tasks/${id}`);
   }
 
   createTask(task: Task): Observable<Task> {
-    return this._http.post<Task>(`${environment.API_URL}/api/tasks`, task);
+    return this._http.post<Task>(`/api/tasks`, task);
   }
 }
